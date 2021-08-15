@@ -16,15 +16,16 @@ import (
 func main() {
 	planningPokerLogger := log.New(os.Stdout, "Collaborative Planning App", log.LstdFlags)
 	planningPokerHandler := handlers.NewPlanningPokerMeta(planningPokerLogger)
-	dnsMux := mux.NewRouter()
+	planningPokerMux := mux.NewRouter()
 
 	// Register POST route for out endpoint
-	postRouter := dnsMux.Methods(http.MethodPost).Subrouter()
+	postRouter := planningPokerMux.Methods(http.MethodPost).Subrouter()
 	postRouter.HandleFunc("/planningpoker/v1/create-poll", planningPokerHandler.CreatePoll)
 	postRouter.Use(planningPokerHandler.MiddlewareCreatePollRequestValidation)
 
 	//serve swagger for the api
-	getRouter := dnsMux.Methods(http.MethodGet).Subrouter()
+	getRouter := planningPokerMux.Methods(http.MethodGet).Subrouter()
+	getRouter.HandleFunc("/", planningPokerHandler.Welcome)
 	opts := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
 	sh := middleware.Redoc(opts, nil)
 	getRouter.Handle("/docs", sh)
@@ -32,7 +33,7 @@ func main() {
 
 	server := http.Server{
 		Addr:         ":8080",
-		Handler:      dnsMux,
+		Handler:      planningPokerMux,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,

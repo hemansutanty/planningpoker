@@ -15,14 +15,39 @@ Create a poll. A user creates a poll and can share this with other people (this 
 Join a pre-existing poll created by you or someone else. You should be able to cast your vote on different points in a predefined set (0, 1/2, 1, 2, 3, 5, 8, 13). A user can only vote once, but is permitted to change their vote.
 Visualize the results in real-time of a poll: Anyone should be able to see the results of a poll. If user A is casting a vote "2", user B should in real-time be able to see that the point "2" has a value of 1.
 
-# Building image
+
+# Development
+
+## Building image 
 ```bash
 docker build -t planningpoker .
 ```
 
-# Running app locally
+## Running app locally
 ```bash
 docker run -d -p 8080:8080 planningpoker
+```
+
+# Deploying to heroku
+## Login heroku
+```bash
+heroku login
+```
+
+## Create app
+```bash
+heroku create
+```
+* Take the app url
+
+## Inform Heroku to build app using Docker
+```bash
+heroku stack:set container
+```
+
+## Push app
+```bash
+git push heroku master
 ```
 
 # Backend App URL
