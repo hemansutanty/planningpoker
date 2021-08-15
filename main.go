@@ -34,7 +34,7 @@ func main() {
 	port := os.Getenv("PORT")
 
 	server := http.Server{
-		Addr:         port,
+		Addr:         ":" + port,
 		Handler:      planningPokerMux,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  5 * time.Second,
