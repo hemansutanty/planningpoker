@@ -15,7 +15,7 @@ import (
 // CreatePoll handler function to pass the request onto service layer
 func (p *PlanningPokerMeta) CreatePoll(rw http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle CreatePoll")
-	prod := r.Context().Value(KeyplanningPokerData{}).(data.DNSRequest)
+	prod := r.Context().Value(KeyplanningPokerData{}).(data.CreatePollRequest)
 	response, apiErr := service.CreatePoll(&prod)
 	if apiErr != nil {
 		http.Error(rw, "Unable to create poll", http.StatusInternalServerError)

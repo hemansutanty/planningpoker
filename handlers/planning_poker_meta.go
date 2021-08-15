@@ -45,18 +45,18 @@ func NewPlanningPokerMeta(l *log.Logger) *PlanningPokerMeta {
 //KeyplanningPokerData struct
 type KeyplanningPokerData struct{}
 
-//MiddlewarePlanningPokerRequestValidation is responsible for Deserializing request and validating the request before apssing to the service layer
-func (p PlanningPokerMeta) MiddlewarePlanningPokerRequestValidation(next http.Handler) http.Handler {
+//MiddlewareCreatePollRequestValidation is responsible for Deserializing request and validating the request before apssing to the service layer
+func (p PlanningPokerMeta) MiddlewareCreatePollRequestValidation(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		prod := data.PlanningPokerRequest{}
-		err := prod.FromJSONDNSRequest(r.Body)
+		prod := data.CreatePollRequest{}
+		err := prod.FromJSONCreatePollRequest(r.Body)
 		if err != nil {
 			p.l.Println("Error Deserializing Create Poll Request", err)
 			http.Error(rw, "Unable to unmarshal Json", http.StatusBadRequest)
 			return
 		}
 
-		err = prod.ValidateDNSRequest()
+		err = prod.ValidateCreatePollRequest()
 		if err != nil {
 			p.l.Println("Error Validating product", err)
 			http.Error(rw, "Unable to validate request", http.StatusBadRequest)
