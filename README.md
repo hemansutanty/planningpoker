@@ -25,7 +25,7 @@ docker build -t planningpoker .
 
 ## Running app locally
 ```bash
-docker run -d -p 8080:8080 planningpoker
+docker run -d -p 80:80 planningpoker
 ```
 
 # Deploying to heroku

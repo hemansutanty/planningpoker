@@ -16,7 +16,7 @@ func (p *PlanningPokerMeta) Welcome(rw http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle CreatePoll")
 	response, apiErr := service.Welcome()
 	if apiErr != nil {
-		http.Error(rw, "Unable to create poll", http.StatusInternalServerError)
+		http.Error(rw, "Something went wrong", http.StatusInternalServerError)
 		return
 	}
 	jsonUnmarshalErr := response.ToJSON(rw)

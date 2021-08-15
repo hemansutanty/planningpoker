@@ -10,6 +10,4 @@ RUN export GO111MODULE=on
 
 RUN go build -o /planningpoker
 
-EXPOSE 8080
-
 CMD [ "/planningpoker" ]

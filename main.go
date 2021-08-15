@@ -32,7 +32,6 @@ func main() {
 	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
 	server := http.Server{
-		Addr:         ":8080",
 		Handler:      planningPokerMux,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  5 * time.Second,
