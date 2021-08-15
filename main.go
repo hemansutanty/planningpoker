@@ -31,7 +31,10 @@ func main() {
 	getRouter.Handle("/docs", sh)
 	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
+	port := os.Getenv("PORT")
+
 	server := http.Server{
+		Addr:         port,
 		Handler:      planningPokerMux,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  5 * time.Second,
