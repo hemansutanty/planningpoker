@@ -13,7 +13,7 @@ type CreatePollRequest struct {
 	// required: true
 	CreatedBy string `json:"created_by" validate:"required"`
 	// required: true
-	PollDescription string `json:"y" validate:"poll_description"`
+	PollDescription string `json:"poll_description" validate:"required"`
 }
 
 //FromJSONCreatePollRequest decodes request from json to struct

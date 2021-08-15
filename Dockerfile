@@ -8,7 +8,7 @@ RUN go mod download
 
 RUN export GO111MODULE=on
 
-RUN go build -o /dns
+RUN go build -o /planningpoker
 
 EXPOSE 8080
 
